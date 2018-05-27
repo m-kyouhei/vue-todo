@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" 
+      content="width=device-width, initial-scale=1.0">
+  <title>SAMPLE TODO</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>
+      <input type="text"
+        placeholder="TODOを追加する"
+        v-model="newItemTitle"
+        v-on:keyup.enter="addTodo(newItemTitle)">
+    </p>
+
+    <ul>
+      <li v-for="item in items">
+        <label v-bind:class="{ done: item.isChecked }">
+          <input type="checkbox" 
+              v-model="item.isChecked">
+          {{ item.title }}
+        </label>
+      </li>
+    </ul>
+
+    <button v-on:click="deleteTodo()">
+      チェック済みの項目を完了にする
+    </button>
+
+    <div style="margin-top: 30px;">
+      <input type="checkbox"
+         v-model="showDoneTodo">達成済みのTODOを表示
+    </div>
+
+    <ul>
+      <li v-for="item in removedItems"
+        v-show="showDoneTodo">
+        <labe>
+          <input type="checkbox" 
+              v-model="item.isChecked">
+          {{ item.title }}
+        </label>
+      </li>
+    </ul>
+
+    <button v-on:click="recoverTodo()">
+      チェック済みの項目を未達成リストに戻す
+    </button>
+
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="./main.js"></script>
+
+</body>
+
+<style>
+  .done { text-decoration: line-through; }
+</style>
+  
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" 
+      content="width=device-width, initial-scale=1.0">
+  <title>SAMPLE TODO</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>
+      <input type="text"
+        placeholder="入力"
+        v-model="newItemTitle"
+        v-on:keyup.enter="addTodo(newItemTitle)">
+    </p>
+
+    <div>
+      <input type="checkbox"
+         v-model="showTodo">未達成のTODOを表示
+    </div>
+    <div>
+      <input type="checkbox"
+         v-model="showDone">達成済みのTODOを表示
+    </div>
+
+    <ul>
+      <li v-for="item in items"
+        v-show="showOrHideTodo(item)">
+        <label v-bind:class="{ done: item.isChecked }">
+          <input type="checkbox" 
+              v-model="item.isChecked">
+          {{ item.title }}
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="./main.js"></script>
+
+</body>
+
+<style>
+  .done { text-decoration: line-through; }
+</style>
+  
+</html>
